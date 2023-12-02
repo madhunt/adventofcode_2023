@@ -1,8 +1,32 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
 // this is equivalent to #define MAX_STRING_SIZE 1000
 const int MAX_STRING_SIZE = 1000;
+
+int word_to_digit(char *character) {
+    if (strncmp(character, "one", 3) == 0) {
+        return 1; }
+    if (strncmp(character, "two", 3) == 0) {
+        return 2; }
+    if (strncmp(character, "three", 5) == 0) {
+        return 3; }
+    if (strncmp(character, "four", 4) == 0) {
+        return 4; }
+    if (strncmp(character, "five", 4) == 0) {
+        return 5; }
+    if (strncmp(character, "six", 3) == 0) {
+        return 6; }
+    if (strncmp(character, "seven", 5) == 0) {
+        return 7; }
+    if (strncmp(character, "eight", 5) == 0) {
+        return 8; }
+    if (strncmp(character, "nine", 4) == 0) {
+        return 9; }
+    
+    return 0;
+}
 
 
 int main() {
@@ -23,7 +47,15 @@ int main() {
                 last_digit = character - '0';
                 // if this is the first time through this string
                 if(first_digit == -1){
-                    first_digit = character - '0';
+                    first_digit = last_digit;
+                }
+            }
+
+            // not a digit. is it a word?
+            if(word_to_digit(&string[index])){
+                last_digit = word_to_digit(&string[index]);
+                if(first_digit == -1){
+                    first_digit = last_digit;
                 }
             }
             index ++;
